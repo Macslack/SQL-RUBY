@@ -48,7 +48,7 @@ class Bounty
     return Bounty.new(result[0])
   end
   def self.find_by_id(id)
-    db = PG.connect({ dbmname:"bounties", host:"localhost"})
+    db = PG.connect({ dbname:"bounties", host:"localhost"})
     sql ="SELECT * FROM bounties WHERE id = $1"
     db.prepare("find_by_id", sql)
     values = [id]
