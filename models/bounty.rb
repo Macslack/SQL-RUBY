@@ -56,5 +56,13 @@ class Bounty
     db.close()
     return Bounty.new(result[0])
   end
-
-end
+  def self.all()
+    db = PG.connect({ dbname:"bounties", host:"localhost"})
+    sql = "SELECT * FROM bounties"
+    db.prepare("all", sql)
+    all_bounties = db.exec_prepared("all")
+    db.close()
+    return all_bounties.map {|bounty| Bounty.new(bounty)}
+  end
+  
+  end
