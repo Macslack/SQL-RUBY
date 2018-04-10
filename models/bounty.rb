@@ -64,5 +64,12 @@ class Bounty
     db.close()
     return all_bounties.map {|bounty| Bounty.new(bounty)}
   end
-  
+  def self.delete_all()
+    db = PG.connect({ dbname:"bounties", host:"localhost"})
+    sql = "DELETE FROM bounties"
+    db.prepare("delete_all", sql)
+    db.exec_prepared("delete_all")
+    db.close()
+  end
+
   end
